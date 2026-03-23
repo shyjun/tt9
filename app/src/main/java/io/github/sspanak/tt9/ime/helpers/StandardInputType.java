@@ -198,7 +198,7 @@ abstract public class StandardInputType {
 
 				// For all unknown input types, default to the alphabetic
 				// keyboard with no special features.
-				allowedModes.add(InputMode.MODE_123);
+				allowedModes.add(InputMode.MODE_123);  // to fully comment NUMPAD in brute force way, comment this line
 				allowedModes.add(InputMode.MODE_ABC);
 
 				return allowedModes;
