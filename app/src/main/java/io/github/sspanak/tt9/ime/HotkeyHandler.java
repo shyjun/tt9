@@ -7,6 +7,7 @@ import io.github.sspanak.tt9.commands.CmdMoveCursor;
 import io.github.sspanak.tt9.ime.helpers.InputConnectionAsync;
 import io.github.sspanak.tt9.ime.helpers.Key;
 import io.github.sspanak.tt9.ime.helpers.TextField;
+import io.github.sspanak.tt9.ime.modes.InputMode;
 import io.github.sspanak.tt9.ime.modes.InputModeKind;
 import io.github.sspanak.tt9.ime.modes.ModeRecomposing;
 import io.github.sspanak.tt9.languages.LanguageKind;
@@ -444,6 +445,27 @@ public abstract class HotkeyHandler extends CommandHandler {
 
 		suggestionOps.scheduleDelayedAccept(mInputMode.getAutoAcceptTimeout()); // restart the timer
 		final int nextModeId = nextInputMode();
+		if (nextModeId != mInputMode.getId()) {
+			setInputMode(nextModeId);
+		}
+
+		forceShowWindow();
+		return true;
+	}
+
+
+	public boolean onKeyNextInputMode_force_numbpad(boolean validateOnly) {
+		if (allowedInputModes.size() == 1) {
+			return false;
+		}
+
+		if (validateOnly) {
+			return true;
+		}
+
+		suggestionOps.scheduleDelayedAccept(mInputMode.getAutoAcceptTimeout()); // restart the timer
+		//final int nextModeId = nextInputMode();
+		final int nextModeId = InputMode.MODE_123;
 		if (nextModeId != mInputMode.getId()) {
 			setInputMode(nextModeId);
 		}
