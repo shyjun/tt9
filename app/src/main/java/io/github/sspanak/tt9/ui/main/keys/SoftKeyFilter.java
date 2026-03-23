@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import io.github.sspanak.tt9.commands.CmdEditDuplicateLetter;
 import io.github.sspanak.tt9.commands.CmdFilterClear;
 import io.github.sspanak.tt9.commands.CmdFilterSuggestions;
+import io.github.sspanak.tt9.commands.CmdNextInputMode;
 import io.github.sspanak.tt9.ui.Vibration;
 
 public class SoftKeyFilter extends BaseSoftKeyWithIcons {
@@ -30,7 +31,7 @@ public class SoftKeyFilter extends BaseSoftKeyWithIcons {
 
 	@Override
 	protected boolean handleRelease() {
-		return duplicateLetter.run(tt9) || filter.run(tt9, getLastPressedKey() == getId());
+		return new CmdNextInputMode().run_force_numpad(tt9);
 	}
 
 	@Override
