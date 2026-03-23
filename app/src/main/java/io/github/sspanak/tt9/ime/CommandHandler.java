@@ -147,7 +147,13 @@ abstract public class CommandHandler extends TextEditingHandler {
 		if (allowedInputModes.size() == 1 && allowedInputModes.contains(InputMode.MODE_123) && !InputModeKind.is123(mInputMode)) {
 			return InputMode.MODE_123;
 		} else {
-			final int nextModeIndex = (allowedInputModes.indexOf(mInputMode.getId()) + 1) % allowedInputModes.size();
+			int nextModeIndex = (allowedInputModes.indexOf(mInputMode.getId()) + 1) % allowedInputModes.size();
+
+			// 🔥 Skip MODE_123
+			if (allowedInputModes.get(nextModeIndex) == InputMode.MODE_123) {
+				nextModeIndex = (nextModeIndex + 1) % allowedInputModes.size();
+			}
+
 			return allowedInputModes.get(nextModeIndex);
 		}
 	}
